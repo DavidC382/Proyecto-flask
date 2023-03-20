@@ -1,0 +1,77 @@
+{% extends "layout.html" %} {% block content %}
+
+<nav>
+    <div class="navbar navbar-expand-lg ">
+        <i class='bx bx-menu'></i>
+        <div class="logo"><a href="{{url_for('admin')}}">Myshop</a></div>
+        <div class="nav-links">
+            <div class="sidebar-logo">
+                <span class="logo-name">Myshop</span>
+                <i class='bx bx-x'></i>
+            </div>
+            <ul class="links">
+                <li><a href="{{url_for('admin')}}">Products <span class="sr-only">(current)</span></a></li>
+                <li>
+                    <a href="{{url_for('brands')}}">brand</a>
+                </li>
+                <li>
+                    <a href="{{url_for('categories')}}">catgory</a>
+                </li>
+                <li>
+                    <li>
+                        <a href="#">Add products</a>
+                        <i class='bx bxs-chevron-down js-arrow arrow '></i>
+                        <ul class="js-sub-menu sub-menu">
+                            <li><a href="{{url_for('addproduct')}}">Add product</a></li>
+                            <li><a href="{{url_for('addbrand')}}">add brand</a></li>
+                            <li><a href="{{url_for('addcat')}}">add category</a></li>
+
+                        </ul>
+                    </li>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br><br><br>
+
+<!--==========END NAVBAR ==============-->
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            {% include '_messages.html' %} {% if brands %}
+            <div class="text-center  p-2 h3 mb-3">{% if updatebrand %} Update {% else %}Add a {% endif %} brand</div>
+            <form method=post>
+                <div>
+                    <form action="" method="post">
+                        {% if updatebrand %}
+                        <input type="text" name="brand" class="form-control" value="{{updatebrand.name}}">
+                        <input type="submit" value="update brand" class="btn btn-info mt-3"> {% else %}
+                        <input type="text" name="brand" class="form-control">
+                        <input type="submit" value="Add a brand" class="btn btn-info mt-3"> {% endif %}
+
+                    </form>
+                </div>
+            </form>
+            {% else %}
+            <div class="text-center  p-2 h3 mb-3">{% if updatecat %}Upade {% else %}Add a {% endif %}category</div>
+            <form method=post>
+                <div>
+                    <form action="" method="post">
+                        {% if updatecat %}
+                        <input type="text" name="category" class="form-control" value="{{updatecat.name}}">
+                        <input type="submit" value="Update category" class="btn btn-info mt-3"> {% else %}
+                        <input type="text" name="category" class="form-control">
+                        <input type="submit" value="Add a category" class="btn btn-info mt-3"> {% endif %}
+
+                    </form>
+                </div>
+            </form>
+            {% endif %}
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+{% endblock content %}

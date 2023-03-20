@@ -1,0 +1,38 @@
+{% extends "layout.html" %} {% block content %}
+<style>
+    .custom-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 4rem;
+        font-weight: 700;
+        color: #f6f5f5;
+        background-color: #1d1b64;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        padding: 1rem;
+        margin: 2rem 0;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div>
+                <h1 class="custom-title">Login</h1>
+            </div>
+            {% from "_formhelpers.html" import render_field %} {% include '_messages.html' %}
+            <form method=post>
+                {{form.csrf_token}}
+                <div>
+                    {{ render_field(form.email, class="form-control") }} {{ render_field(form.password, class="form-control") }}
+                </div>
+                <input type="submit" value="Login" class="btn-info">
+            </form>
+            <p>Create user <a href="{{url_for('customer_register')}}">register</a></p>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,177 @@
+{% extends 'layout.html' %} {% block content %} {% include 'navbar.html' %}
+<br><br><br>
+<style>
+    .card {
+        background: #ffffff;
+        width: var(--card-width);
+        height: var(--card-height);
+        padding: 3px;
+        position: relative;
+        border-radius: 6px;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        display: flex;
+        font-size: 1.5em;
+        color: rgb(24, 24, 24);
+        cursor: pointer;
+        font-family: cursive;
+    }
+    
+    .card:hover {
+        color: rgb(48, 48, 48);
+    }
+    
+    .card:hover:before,
+    .card:hover:after {
+        animation: none;
+        opacity: 0;
+    }
+    
+    .card::before {
+        content: "";
+        width: 104%;
+        height: 102%;
+        border-radius: 8px;
+        background-image: linear-gradient( var(--rotate), #5ddcff, #3c67e3 43%, #4e00c2);
+        position: absolute;
+        z-index: -1;
+        top: -1%;
+        left: -2%;
+        animation: spin 2.5s linear infinite;
+    }
+    
+    .card::after {
+        position: absolute;
+        content: "";
+        top: calc(var(--card-height) / 6);
+        left: 0;
+        right: 0;
+        z-index: -1;
+        height: 100%;
+        width: 100%;
+        margin: 0 auto;
+        transform: scale(0.8);
+        filter: blur(calc(var(--card-height) / 6));
+        background-image: linear-gradient( var(--rotate), #5ddcff, #3c67e3 43%, #4e00c2);
+        opacity: 1;
+        transition: opacity .5s;
+        animation: spin 2.5s linear infinite;
+    }
+    
+    @keyframes spin {
+        0% {
+            --rotate: 0deg;
+        }
+        100% {
+            --rotate: 360deg;
+        }
+    }
+    
+    .btn {
+        position: relative;
+        text-decoration: none;
+        color: #2b2b2b;
+        z-index: 2;
+    }
+    /*-----------boton 1----------*/
+    
+    .btn-1 {
+        overflow: hidden;
+        border: 3px solid #bbcc03;
+        z-index: 2;
+    }
+    
+    .btn-1::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 200%;
+        left: 0;
+        top: -200%;
+        background-color: #b8cc03;
+        border-radius: 50%;
+        transition: all 0.6s ease;
+        z-index: -1;
+    }
+    
+    .btn-1:hover:before {
+        top: 0;
+        border-radius: 0%;
+    }
+    
+    .btn-5 {
+        border: 3px solid #17a2ff;
+        overflow: hidden;
+    }
+    
+    .btn-5::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background-color: rgb(10, 157, 255);
+        z-index: -2;
+    }
+    
+    .btn-5::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 250px;
+        left: 0;
+        bottom: -150%;
+        border-radius: 30%;
+        background-color: #ffffff;
+        z-index: -1;
+    }
+    
+    .btn-5:hover::before {
+        animation: btn-5 2s linear both;
+    }
+    
+    @keyframes btn-5 {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            bottom: 100px;
+            transform: rotate(360deg);
+        }
+    }
+</style>
+
+
+<div class="container">
+    <div class="row">
+        {% for product in products %}
+        <div class="col-md-3 mt-4">
+            <div class="card">
+                <img src="{{url_for('static', filename='images/' + product.image_1)}}" class="card-img-top" alt="{{product.name}}" height="200" width="200">
+                <div class="card-body">
+                    {% if product.discount > 0 %}
+                    <h5 style="text-shadow: 1px 2px 2px #000; color: rgb(72, 0, 255); transform: rotate(-15deg); position: absolute; top: 23%; left: 25%; font-weight: 600;"> Discount {{product.discount}}</h5>
+                    {% endif %}
+                    <h5 class="text-center">{{product.name}}</h5>
+                    <p class="text-center">Price ${{product.price}}</p>
+                    <a href="{{url_for('single_page',id=product.id)}}" class="btn btn-5"><i class="far fa-file-alt"></i> Details</a>
+                    <form action="{{url_for('AddCart')}}" method="post">
+                        <input type="hidden" name="product_id" value="{{product.id}}">
+                        <button type="submit" class="btn btn-1"><i class="fa-sharp fa-solid fa-cart-plus "></i></button> {% set colors = product.colors.split(',') %}
+                        <select name="colors" id="colors" style="visibility: hidden;">
+                      {% for color in colors %}
+                      {% set col = color.split(':') %}
+                      <option value="{{col[0]}}">{{col[0] | capitalize }}</option>
+                      {% endfor %}
+                  </select>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<script src="https://kit.fontawesome.com/006fe79102.js" crossorigin="anonymous"></script>
+{% include 'navinf.html' %} {% endblock content %}

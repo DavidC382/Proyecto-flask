@@ -1,0 +1,81 @@
+<style>
+    /*Redes sociales */
+    
+    .buttonslink {
+        min-width: 700px;
+        display: flex;
+        justify-content: space-around;
+    }
+    
+    .buttonslink a {
+        text-decoration: none;
+        font-size: 28px;
+        width: 60px;
+        height: 60px;
+        line-height: 60px;
+        text-align: center;
+        background: #314652;
+        color: #f1f1f1;
+        border-radius: 50%;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, .5);
+        transition: all .4s ease-in-out;
+    }
+    
+    .buttonslink a:hover {
+        transform: scale(1.2);
+    }
+    
+    .cardsfooter {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 500px));
+        gap: 20px;
+    }
+    
+    .cardfooter {
+        height: 200px;
+        border: none;
+    }
+    
+    a {
+        text-decoration: none;
+        /* quita el subrayado */
+        color: rgb(22, 22, 22);
+        /* establece el color del texto a negro */
+    }
+    /*--------------*/
+</style>
+
+<footer class="bd-footer py-4 py-md-5 mt-5 bg-body-tertiary rounded">
+    <div class="container py-4 py-md-5 px-4 px-md-3 text-body-secondary ">
+        <div class="cardsfooter">
+            <div class="cardfooter">
+                <h5>Contacto</h5>
+                <ul class="list-unstyled">
+                    <h6>Tels: 3222945859/3245647071</h6>
+                    <h6>Whatsapp: <a href="https://wa.me/573245647071?text=Compra los últimos modelos de celulares al mejor precio en nuestra tienda en línea. Visítanos hoy mismo y aprovecha nuestras ofertas especiales: https%3A%2F%2Fwww.ejemplo.com%2Fcelulares%2Fofertas"
+                            target="_blank">+57 3245647071</a></h6>
+                    <h6>electShop_md@ejmp.com</h6>
+                    <h6>Universidad De Nariño, Ipiales, Nariño</h6>
+                </ul>
+            </div>
+            <div class="cardfooter">
+                <h5>Links</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="#">Search</a></li>
+                    <li class="mb-2"><a href="{{url_for('pageabout')}}">Developers</a></li>
+                </ul>
+            </div>
+            <div class="cardfooter">
+                <h5>Síguenos</h5>
+                <section class="buttonslink">
+                    <a href="https://facebook.com" class="fa fa-facebook"></a>
+                    <a href="https://twitter.com" class="fa fa-twitter"></a>
+                    <a href="https://googleplus.com" class="fa fa-google-plus"></a>
+                    <a href="https://www.youtube.com" class="fa fa-youtube"></a>
+                    <a href="https://co.linkedin.com" class="fa fa-linkedin"></a>
+                </section>
+            </div>
+        </div>
+        <p><b>Medios de pago</b>: Efectivo - Consignación - Transferencia - Via Baloto </p>
+    </div>
+</footer>

@@ -1,0 +1,61 @@
+<nav>
+    <div class="navbar navbar-expand-lg ">
+        <i class='bx bx-menu'></i>
+        <div class="logo"><a href="/">Electronic Shop</a></div>
+        <div class="nav-links">
+            <div class="sidebar-logo">
+                <span class="logo-name">Electronic Shop</span>
+                <i class='bx bx-x'></i>
+            </div>
+            <ul class="links">
+                <li><a href="/">Products <span class="sr-only">(current)</span></a></li>
+                <li>
+                    <a href="#">Brands</a>
+                    <i class='bx bxs-chevron-down htmlcss-arrow arrow  '></i>
+                    <ul class="htmlCss-sub-menu sub-menu">
+                        {% for brand in brands %}
+                        <li><a href="{{url_for('get_brand', id=brand.id)}}">{{brand.name}}</a></li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Categories</a>
+                    <i class='bx bxs-chevron-down js-arrow arrow  '></i>
+                    <ul class="js-sub-menu sub-menu">
+                        {% for category in categories %}
+                        <li><a href="{{url_for('get_category',id=category.id)}}">{{category.name}}</a></li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                {% if current_user.is_authenticated %}
+                <li>
+                    <a><i class="fa-solid fa-user"></i> {{current_user.name}}</a>
+                </li>
+                <li>
+                    <a href="{{url_for('customer_logout')}}"><i class="fa-solid fa-right-from-bracket"></i></a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="{{url_for('customer_register')}}"><i class="fa-solid fa-user-plus"></i> register</a>
+                </li>
+                <li>
+                    <a href="{{url_for('customerLogin')}}"><i class="fa-solid fa-user"></i> login</a>
+                </li>
+                {% endif %}
+                <li>
+                    <a href="{{url_for('getCart')}}"> <i class="fa-solid fa-cart-shopping"></i> ({{ session['Shoppingcart']|length }}) </a>
+                </li>
+            </ul>
+        </div>
+        <div class="search-box">
+            <i class='bx bx-search'></i>
+            <div class="input-box">
+                <form class="form-inline my-2 my-lg-0" action="{{url_for('result')}}">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+                    <button type="submit"></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</nav>
+<!---============== END OF NAV BAR ==================-->
